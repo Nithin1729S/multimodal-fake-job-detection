@@ -182,7 +182,8 @@ def capture_company_image(job_id, company_profile, label):
                 import shutil
                 shutil.copy2(cached_path, new_path)
                 return new_path
-        
+        # else:
+        #     return None
         # Create search query and encode it for URL
         search_query = f"{company_profile} company profile"
         encoded_query = urllib.parse.quote_plus(search_query)
