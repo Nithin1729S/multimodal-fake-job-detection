@@ -60,7 +60,7 @@ To run the dataset preparation script:
 
 pip install -r requirements.txt
 
-cd Dataset/ Preparation 
+cd Dataset\ Preparation 
 
 # Process entire dataset
 python duck_duck_go_scrapper_parallelized.py
