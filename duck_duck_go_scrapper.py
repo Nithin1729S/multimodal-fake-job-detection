@@ -48,16 +48,7 @@ def get_cache_key(company_profile):
 
 # Load dataset and take first 10 samples, limit company_profile to 50 chars
 df = pd.read_csv("fake_job_postings.csv")
-
-# Replace missing or empty company_profile with description
-df['company_profile'] = df['company_profile'].fillna('')
-df['description'] = df['description'].fillna('')
-
-df['company_profile'] = df.apply(
-    lambda row: row['company_profile'] if row['company_profile'].strip() != '' else row['description'],
-    axis=1
-)
-
+df = df.dropna(subset=['company_profile'])
 # Limit company_profile to first 50 characters
 df['company_profile'] = df['company_profile'].str[:50]
 
