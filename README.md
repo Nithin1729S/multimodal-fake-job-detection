@@ -80,3 +80,5 @@ images/
     ├── 2002.png
     └── ...
 ```
+
+To find the image for a particular sample, use the path format: `images/{fraudulent}/{job_id}.png`
