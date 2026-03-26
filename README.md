@@ -85,4 +85,108 @@ images/
 
 To find the image for a particular sample, use the path format: `images/{fraudulent}/{job_id}.png`
 
+## Model Architecture and Training
+
+This section describes the multimodal model design, feature processing, and training pipeline used for fake job posting detection.
+
+### Multimodal Architecture
+
+The system combines **text features** and **image features** into a unified model. The architecture consists of three main components:
+<img width="947" height="1678" alt="mermaid-diagram (1)" src="https://github.com/user-attachments/assets/b3395ff7-54fd-4414-b0b7-873120eabc8a" />
+
+
+#### 1. Text Encoder
+- **Input**: Job title, description, requirements, benefits, company profile  
+- **Preprocessing**:
+  - Lowercasing
+  - Stopword removal
+  - Tokenization
+- **Feature Extraction**:
+  - TF-IDF vectorization / pretrained embeddings
+- **Output**: Dense feature vector representation of textual data  
+
+#### 2. Image Encoder
+- **Input**: Company profile images (website screenshots)  
+- **Preprocessing**:
+  - Resize to fixed dimensions
+  - Normalization
+- **Feature Extraction**:
+  - Pretrained CNN (e.g., ResNet / EfficientNet)
+  - Feature maps flattened into embeddings  
+- **Output**: Visual feature vector representation  
+
+#### 3. Fusion Layer
+- Concatenates text and image feature vectors  
+- Passes combined features through fully connected layers  
+- Applies non-linear activation functions (ReLU)  
+- Uses dropout for regularization  
+
+#### 4. Classification Head
+- Final dense layer with sigmoid / softmax  
+- Outputs probability of job being fraudulent  
+
+---
+
+### Training Pipeline
+
+#### Data Splitting
+- Train / Validation / Test split  
+- Stratified sampling to maintain class balance  
+
+#### Training Configuration
+- **Loss Function**: Binary Cross-Entropy  
+- **Optimizer**: Adam  
+- **Batch Size**: Configurable (e.g., 32 / 64)  
+- **Learning Rate**: Tuned using validation set  
+
+#### Training Steps
+1. Load textual and image data  
+2. Encode text and images separately  
+3. Fuse features into a single representation  
+4. Train classification model  
+5. Validate performance after each epoch  
+
+---
+
+# Results
+
+## Metrics
+- Accuracy: 0.9871
+- Precision: 0.9045
+- Recall: 0.8208
+- F1: 0.8606
+- ROC-AUC: 0.9758
+
+## Classification Report
+              precision    recall  f1-score   support
+
+           0       0.99      1.00      0.99      3403
+           1       0.90      0.82      0.86       173
+
+    accuracy                           0.99      3576
+   macro avg       0.95      0.91      0.93      3576
+weighted avg       0.99      0.99      0.99      3576
+
+## Confusion Matrix
+[[3388   15]
+ [  31  142]]
+
+---
+
+### Key Advantages
+
+- Combines **semantic understanding** (text) with **visual credibility cues** (images)  
+- Reduces false positives compared to text-only models  
+- Scalable to other fraud detection domains  
+
+---
+
+### Limitations
+
+- Image quality depends on scraping success  
+- Some companies may not have valid websites  
+- Increased computational cost due to multimodal processing  
+
+
+
 [*Code can be found here*](https://www.kaggle.com/code/nithin1729s/cv-project-v01) 
