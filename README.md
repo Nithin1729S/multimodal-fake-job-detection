@@ -151,11 +151,15 @@ The system combines **text features** and **image features** into a unified mode
 # Results
 
 ## Metrics
-- Accuracy: 0.9871
-- Precision: 0.9045
-- Recall: 0.8208
-- F1: 0.8606
-- ROC-AUC: 0.9758
+
+| Metric    | Value  |
+|-----------|--------|
+| Accuracy  | 0.9871 |
+| Precision | 0.9045 |
+| Recall    | 0.8208 |
+| F1 Score  | 0.8606 |
+| ROC-AUC   | 0.9758 |
+
 
 ## Classification Report
               precision    recall  f1-score   support
@@ -168,9 +172,17 @@ The system combines **text features** and **image features** into a unified mode
 weighted avg       0.99      0.99      0.99      3576
 
 ## Confusion Matrix
-[[3388   15]
- [  31  142]]
 
+|               | Predicted Negative | Predicted Positive |
+|---------------|--------------------|--------------------|
+| Actual Negative | 3388               | 15                 |
+| Actual Positive | 31                 | 142                |
+
+### Summary
+- True Negatives (TN): 3388  
+- False Positives (FP): 15  
+- False Negatives (FN): 31  
+- True Positives (TP): 142  
 ---
 
 ### Key Advantages
